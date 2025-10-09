@@ -41,4 +41,5 @@ console.log("  ");
 console.log("The Name of this song is: " + songName(jkw));
 console.log("The Artist of this song is: " + songArtist(jkw));
 console.log("The genre of this song is: " + songGenre(jkw));
+console.log("The genre of this song is: " + songGenre(jkw));
 console.log("  ");
