@@ -1,0 +1,56 @@
+body {
+  background-color: #F9F6EE;
+  font-family: "Lucida Console", "Courier New", monospace;
+
+}
+
+h1 {
+  color: rgb(0, 0, 0);
+  text-align: center;
+  font-size: 60px;
+}
+
+h2 {
+  text-align: center;
+  font-weight: bold;
+}
+
+.divider {
+  border-top: 3px solid #000;
+  width: 100%;
+  margin: 10px 0;
+}
+
+.container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.left-content,
+.right-content {
+    flex: 1;
+  padding: 20px;
+  border: 1px solid #cccccc00;
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: 0;
+  width: 200px;
+}
+
+h6 {
+
+    font-style: italic;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a:visited {
+  color: #000000;
+}
