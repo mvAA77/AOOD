@@ -8,7 +8,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "open b",
-            "file": "c:\\Users\\tanya\\OneDrive\\Desktop\\VScode\\AOOD\\Website\\homePage.html"
+            "file": "c:\\Users\\tanya\\OneDrive\\Desktop\\VScode\\AOOD\\Website\\colorsPage.html"
         }
     ]
 }

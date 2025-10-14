@@ -1,18 +1,35 @@
 body {
   background-color: #F9F6EE;
   font-family: "Lucida Console", "Courier New", monospace;
-
 }
 
-h1 {
-  color: rgb(0, 0, 0);
+/* Style all headings with the same class */
+.page-heading, .section-heading {
+  color: #333;
   text-align: center;
+}
+
+/* Make main title larger */
+.page-heading {
   font-size: 60px;
 }
 
-h2 {
-  text-align: center;
+/* Section headings smaller but bold */
+.section-heading {
+  font-size: 30px;
   font-weight: bold;
+  text-decoration: underline;
+}
+
+/* Style for the div with id */
+#color-psychology {
+  background-color: #fffdf6;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  width: 80%;
+  margin: 0 auto;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .divider {
@@ -21,36 +38,19 @@ h2 {
   margin: 10px 0;
 }
 
-.container {
-  display: flex;
-  justify-content: flex-end;
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
 }
 
-.left-content,
-.right-content {
-    flex: 1;
-  padding: 20px;
-  border: 1px solid #cccccc00;
+th, td {
+  border: 1px solid #999;
+  padding: 10px;
+  text-align: center;
 }
 
-img {
-  display: block;
-  margin-left: auto;
-  margin-right: 0;
-  width: 200px;
-}
-
-h6 {
-
-    font-style: italic;
-}
-
-a {
-  color: #007bff;
-  text-decoration: none;
+th {
+  background-color: #eaeaea;
   font-weight: bold;
-}
-
-a:visited {
-  color: #000000;
 }
