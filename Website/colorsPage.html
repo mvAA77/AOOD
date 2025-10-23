@@ -14,6 +14,7 @@
 
         <h1 class="page-heading">Psychology of Colors</h1>
         <div class="divider"></div>
+        <button id="home" onclick="myFunction()">Home</button>
         <div class="divider"></div>
 
         <h2 class="section-heading">Basic Color Psychology</h2>
@@ -98,6 +99,18 @@
                 </tr>
             </table>
         </div>
+
+        <script>
+
+
+
+             const button = document.getElementById('home');
+
+                button.addEventListener('click', function() {
+                globalThis.location.href = 'homePage.html';
+            });
+
+        </script>
 
     </body>
 </html>

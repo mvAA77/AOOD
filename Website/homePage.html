@@ -15,9 +15,11 @@
 
         <h1>Cinematic Color Theory</h1>
         <div class="divider"></div>
+        <button id="myButton" onclick="myFunction()">Psychology of Colors</button>
+
         <div class="divider"></div>
         <div class="container">
-            <div class="left-content">
+            <div class="column">
                 <h2>What is Cinematic Color Theory?</h2>
                 <p>Color theory is the use of color in movies to convey a feeling or idea.
                     Color theory is implemented through production overlay, character wardrobes,
@@ -26,7 +28,7 @@
                 </p>
             </div>
 
-            <div class="left-content">
+            <div class="column">
                 <h2>Common Example</h2>
                 <p>Frozen is a classic example. Anna wears purple, which reflects her royal heritage.
                 She also ears green throughout the movie, representing her wish for freedom 
@@ -41,10 +43,10 @@
 
 
         <div class="container">
-            <div class="left-content">
+            <div class="column">
                 <img src="anna1.jpg" alt="Anna Costumes">
             </div>
-            <div class="right-content">
+            <div class="column">
                     <h6>Anna From Frozen 1</h6>
             </div>
         </div>
@@ -54,7 +56,7 @@
 
         <h2>Types  of Color Theory</h2>
         <div class="container">
-            <div class="left-content">
+            <div class="column">
         <h3>Monochromatic</h3>
             <p>
                 Monochromatic colour schemes consist of one colour or hue wash that dominates 
@@ -63,7 +65,7 @@
                 create a real, inescapable mood for your film.
             </p>
             </div>
-            <div class="right-content">
+            <div class="column">
         <h3>Analogous</h3>
             <p>
                 Analogous colour schemes use a series of three colours that sit near each other on the
@@ -77,7 +79,7 @@
 
 
         <div class="container">
-            <div class="left-content">
+            <div class="column">
         <h3>Complementary</h3>
             <p>
                 Complementary colour schemes are made up of two colours that sit on opposite ends of the spectrum —
@@ -85,7 +87,7 @@
                  in the frame. The direct contrast is startling and noticeable to the eye.
             </p>
             </div>
-            <div class="right-content">
+            <div class="column">
         <h3>Triadic</h3>
             <p>
                 A triadic colour scheme uses three colours that are evenly spread out on the colour wheel. The most common 
@@ -96,7 +98,7 @@
         </div>
 
         <div class="container">
-            <div class="left-content">
+            <div class="column">
         <h3>Discordant</h3>
             <p>
                 Colour discordance is when the director or cinematographer uses a pop of colour that sticks out and doesn’t
@@ -104,7 +106,7 @@
             </p>
 
         </div>
-        <div class="right-content">
+        <div class="column">
         <h3>Associative</h3>
             <p>
                Associative colour palettes are used to refer to specific characters or ideas. Some directors like to choose 
@@ -118,7 +120,7 @@
         </div>
 
         <div class="container">
-            <div class="left-content">
+            <div class="column">
 
         <h3>Transitional</h3>
             <p>
@@ -128,7 +130,7 @@
                   colour palettes reflect this transition.
             </p>
         </div>
-        <div class="right-content">
+        <div class="column">
             <p>"nice text" -Albert</p>
         </div>
         </div>
@@ -137,17 +139,49 @@
         <div class="divider"></div>
 
         <div class="container">
-            <div class="left-content">
+            <div class="column">
 
             <h3>Sources:</h3>
             <a href="https://www.filmd.co.uk/articles/what-is-colour-theory-in-film-how-it-can-transform-your-storytelling/" target="_blank">Color Theory</a>
         </div>
-        <div class="right-content">
+        <div class="column">
 
             <h3>Tanyasai Kadiyala </h3>
             <h4>Marriotts Ridge High School</h4>
         </div>
         </div>
+
+        <script>
+
+            /*let headings = document.getElementsByTagName("h2");
+
+            let headingTexts = [];
+
+            for (let i = 0; i < headings.length; i++) {
+                headingTexts.push(headings[i].textContent);
+            }
+
+            let headingDisplay = document.createElement("p");
+            headingDisplay.textContent = "The section headings on this page are: " + headingTexts.join(", ");
+            document.body.appendChild(headingDisplay);
+
+
+            let paragraphs = document.getElementsByClassName("left-content");
+
+            for (let i = 0; i < paragraphs.length; i++) {
+                paragraphs[i].textContent = "Intro paragraph " + (i + 1);
+            } */
+
+
+             const button = document.getElementById('myButton');
+
+                button.addEventListener('click', function() {
+                globalThis.location.href = 'colorsPage.html';
+            });
+
+        </script>
+
+
 
     </body>
 </html>

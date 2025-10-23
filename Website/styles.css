@@ -1,6 +1,21 @@
 body {
-  background-color: #F9F6EE;
+  background-color: #f9f6ee;
   font-family: "Lucida Console", "Courier New", monospace;
+}
+
+h1 {
+  font-size: 60px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 36px;
+  text-align: center;
+}
+
+h3 {
+  font-size: 29px;
+  text-align: center;
 }
 
 /* Style all headings with the same class */
@@ -53,4 +68,31 @@ th, td {
 th {
   background-color: #eaeaea;
   font-weight: bold;
+}
+
+.container {
+  display: flex; /* Makes the container a flex container */
+  gap: 20px; /* Adds space between columns */
+}
+
+.column {
+  flex: 1; /* Allows columns to grow and shrink equally */
+  padding: 15px;
+}
+
+button {
+
+  background-color: #f9f6ee;
+  color: rgb(0, 0, 0);
+  padding: 10px 20px;
+  border: 1px solid black;
+  border-radius: 5px;
+  font-family: "Lucida Console", "Courier New", monospace;
+  font-size: 20px;
+  cursor: pointer; 
+  text-decoration: none;
+  display: inline-block;
+  align: center;
+  display: block;
+  margin: 0 auto;
 }
