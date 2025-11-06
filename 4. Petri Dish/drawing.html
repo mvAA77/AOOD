@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bacteria Population Visualization</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        .canvas-container {
+            position: relative;
+            border: 2px solid #333;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        canvas {
+            background-color: #f8f8f8;
+        }
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        #sprayBtn {
+            background-color: #ff6b6b;
+            color: white;
+        }
+        #sprayBtn:hover {
+            background-color: #ff5252;
+        }
+        #resetBtn {
+            background-color: #4dabf7;
+            color: white;
+        }
+        #resetBtn:hover {
+            background-color: #339af0;
+        }
+        .stats {
+            margin-top: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+        .spray-indicator {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 107, 107, 0.3);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        .spray-active {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bacteria Population Visualization</h1>
+    
+    <div class="container">
+        <div class="canvas-container">
+            <canvas id="bacteriaCanvas" width="500" height="500"></canvas>
+            <div id="sprayIndicator" class="spray-indicator"></div>
+        </div>
+        
+        <div class="stats">
+            <p id="populationCount">Current Population: 10</p>
+        </div>
+        
+        <div class="controls">
+            <button id="sprayBtn">Apply Spray</button>
+            <button id="resetBtn">Reset</button>
+        </div>
+    </div>
+
+    <script>
+        class PetriDish {
+            constructor(initial) {
+                this.population = initial;
+                this.bacteria = [];
+                this.intervalId = null;
+                this.canvas = document.getElementById('bacteriaCanvas');
+                this.ctx = this.canvas.getContext('2d');
+                this.sprayIndicator = document.getElementById('sprayIndicator');
+                this.populationDisplay = document.getElementById('populationCount');
+                
+                this.initializeBacteria();
+                this.draw();
+            }
+
+            initializeBacteria() {
+                this.bacteria = [];
+                for (let i = 0; i < this.population; i++) {
+                    this.bacteria.push(this.createBacterium());
+                }
+            }
+
+            createBacterium() {
+                const radius = 8;
+                const margin = radius;
+                
+                let attempts = 0;
+                while (attempts < 100) {
+                    const x = margin + Math.random() * (this.canvas.width - 2 * margin);
+                    const y = margin + Math.random() * (this.canvas.height - 2 * margin);
+                    
+                    let overlap = false;
+                    for (const b of this.bacteria) {
+                        const dx = x - b.x;
+                        const dy = y - b.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        
+                        if (distance < 2 * radius) {
+                            overlap = true;
+                            break;
+                        }
+                    }
+                    
+                    if (!overlap) {
+                        const hue = 60 + Math.random() * 60;
+                        const color = `hsl(${hue}, 70%, 50%)`;
+                        
+                        return { x, y, radius, color };
+                    }
+                    
+                    attempts++;
+                }
+                
+                const x = margin + Math.random() * (this.canvas.width - 2 * margin);
+                const y = margin + Math.random() * (this.canvas.height - 2 * margin);
+                const hue = 60 + Math.random() * 60;
+                const color = `hsl(${hue}, 70%, 50%)`;
+                
+                return { x, y, radius, color };
+            }
+
+            doublepop() {
+                if (this.intervalId) {
+                    clearInterval(this.intervalId);
+                }
+                
+                this.intervalId = setInterval(() => {
+                    const currentCount = this.bacteria.length;
+                    for (let i = 0; i < currentCount; i++) {
+                        if (this.bacteria.length < 1000) {
+                            this.bacteria.push(this.createBacterium());
+                        }
+                    }
+                    
+                    this.population = this.bacteria.length;
+                    this.updateDisplay();
+                    this.draw();
+                }, 3000);
+                
+                return "Bacteria Count: " + this.population;
+            }
+
+            spray() {
+                this.sprayIndicator.classList.add('spray-active');
+                setTimeout(() => {
+                    this.sprayIndicator.classList.remove('spray-active');
+                }, 500);
+                
+                const newPopulation = Math.floor(this.population * 0.8);
+                const bacteriaToRemove = this.population - newPopulation;
+                
+                for (let i = 0; i < bacteriaToRemove; i++) {
+                    if (this.bacteria.length > 0) {
+                        const randomIndex = Math.floor(Math.random() * this.bacteria.length);
+                        this.bacteria.splice(randomIndex, 1);
+                    }
+                }
+                
+                this.population = this.bacteria.length;
+                this.updateDisplay();
+                this.draw();
+                
+                return "Bacteria Count after spray: " + this.population;
+            }
+
+            draw() {
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                
+                for (const bacterium of this.bacteria) {
+                    this.ctx.beginPath();
+                    this.ctx.arc(bacterium.x, bacterium.y, bacterium.radius, 0, 2 * Math.PI);
+                    this.ctx.fillStyle = bacterium.color;
+                    this.ctx.fill();
+                    this.ctx.strokeStyle = '#333';
+                    this.ctx.lineWidth = 1;
+                    this.ctx.stroke();
+                }
+            }
+
+            updateDisplay() {
+                this.populationDisplay.textContent = `Current Population: ${this.population}`;
+            }
+
+            reset() {
+                if (this.intervalId) {
+                    clearInterval(this.intervalId);
+                    this.intervalId = null;
+                }
+                
+                this.population = 10;
+                this.initializeBacteria();
+                this.updateDisplay();
+                this.draw();
+            }
+        }
+
+        const dish = new PetriDish(10);
+        
+        document.getElementById('sprayBtn').addEventListener('click', () => {
+            console.log(dish.spray());
+        });
+        
+        document.getElementById('resetBtn').addEventListener('click', () => {
+            dish.reset();
+        });
+        
+        console.log(dish.doublepop());
+    </script>
+</body>
+</html>

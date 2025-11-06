@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bouncing Rectangle</title>
+    <style>
+        canvas {
+            border: 1px solid #000000;
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <h2>Bouncing Rectangle</h2>
+    <canvas id="myCanvas" width="500" height="300"></canvas>
+
+    <script>
+        let canvas = document.getElementById("myCanvas");
+        let ctx = canvas.getContext("2d");
+
+        let Rectangle = {
+            x: 50,
+            y: 50,
+            width: 80,
+            height: 60,
+            dx: 3,
+            dy: 2, 
+            
+            drawRectangle: function() {
+                ctx.beginPath();
+                ctx.rect(this.x, this.y, this.width, this.height);
+                
+                ctx.lineWidth = 3;
+                ctx.strokeStyle = '#003300';
+                ctx.fillStyle = 'red';
+                
+                ctx.fill();
+                ctx.stroke();
+            },
+            
+            update: function() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                this.drawRectangle();
+                
+                this.x += this.dx;
+                this.y += this.dy;
+                
+                if (this.x <= 0 || this.x + this.width >= canvas.width) {
+                    this.dx = -this.dx;
+                }
+                
+                if (this.y <= 0 || this.y + this.height >= canvas.height) {
+                    this.dy = -this.dy;
+                }
+                
+                requestAnimationFrame(() => this.update());
+            }
+        };
+
+        Rectangle.update();
+    </script>
+</body>
+</html>
