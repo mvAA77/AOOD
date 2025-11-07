@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Move Image on Canvas</title>
+<style>
+  canvas {
+    border: 1px solid black;
+  }
+</style>
+</head>
+
+<body>
+<h1>Move the Image with Arrow Keys</h1>
+
+<canvas id="myCanvas" width="500" height="500"></canvas>
+
+<script>
+  let canvas = document.getElementById("myCanvas");
+  let ctx = canvas.getContext("2d");
+
+  let x = 50;
+  let y = 50;
+
+  let imgWidth = 100;
+  let imgHeight = 100;
+
+  let img = new Image();
+  img.onload = function () {
+    ctx.drawImage(img, x, y, imgWidth, imgHeight);
+  };
+
+  img.src = "https://img.freepik.com/premium-vector/cute-orange-fruit-icon-flat-style-isolated-white-background-vector-illustration_186686-162.jpg";
+
+  document.addEventListener("keydown", moveImage);
+
+  function moveImage(e) {
+    let step = 10;
+
+    switch (e.keyCode) {
+      case 37: // LEFT
+        x -= step;
+        break;
+      case 38: // UP
+        y -= step;
+        break;
+      case 39: // RIGHT
+        x += step;
+        break;
+      case 40: // DOWN
+        y += step;
+        break;
+    }
+
+    if (x < 0) x = 0;
+    if (y < 0) y = 0;
+    if (x > canvas.width - imgWidth) x = canvas.width - imgWidth;
+    if (y > canvas.height - imgHeight) y = canvas.height - imgHeight;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(img, x, y, imgWidth, imgHeight);
+  }
+</script>
+
+</body>
+</html>

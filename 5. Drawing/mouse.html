@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Draw with the Mouse</title>
+    <style>
+        * { overflow: hidden; }
+        body { text-align: center; }
+        h1 { color: green; }
+    </style>
+</head>
+
+<body>
+    <h1>Drawing with a Mouse</h1>
+    <b>Draw anything you want</b>
+    <br><br>
+
+    <!-- Simple color buttons -->
+    <button onclick="changeColor('green')">Green</button>
+    <button onclick="changeColor('red')">Red</button>
+    <button onclick="changeColor('blue')">Blue</button>
+
+    <hr>
+    <canvas id="canvas"></canvas>
+
+<script>
+    // Wait for window to load
+    window.addEventListener('load', ()=>{
+
+        resize();
+        document.addEventListener('mousedown', startPainting);
+        document.addEventListener('mouseup', stopPainting);
+        document.addEventListener('mousemove', sketch);
+        window.addEventListener('resize', resize);
+    });
+
+    const canvas = document.querySelector('#canvas');
+    const ctx = canvas.getContext('2d');
+
+    // default color
+    ctx.strokeStyle = 'green';
+
+    function changeColor(color){
+        ctx.strokeStyle = color;
+    }
+
+    function resize(){
+        ctx.canvas.width = window.innerWidth;
+        ctx.canvas.height = window.innerHeight;
+    }
+
+    let coord = {x:0 , y:0};
+    let paint = false;
+
+    function getPosition(event){
+        coord.x = event.clientX - canvas.offsetLeft;
+        coord.y = event.clientY - canvas.offsetTop;
+    }
+
+    function startPainting(event){
+        paint = true;
+        getPosition(event);
+    }
+
+    function stopPainting(){
+        paint = false;
+    }
+
+    function sketch(event){
+        if (!paint) return;
+
+        ctx.beginPath();
+        ctx.lineWidth = 5;
+        ctx.lineCap = 'round';
+
+        ctx.moveTo(coord.x, coord.y);
+        getPosition(event);
+        ctx.lineTo(coord.x , coord.y);
+        ctx.stroke();
+    }
+</script>
+
+</body>
+</html>
