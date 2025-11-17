@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Statistics Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<h2>Load a File and Calculate Statistics</h2>
+
+<table id="calc">
+    <tr>
+        <td>
+            <label>Enter file path:</label><br>
+            <input type="text" id="filePath" placeholder="Example: text.txt">
+        </td>
+        <td>
+            <button onclick="loadFile()">Load</button>
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="2">
+            <p id="Message"></p>
+            <textarea id="fileInput" cols="50" rows="8"></textarea>
+        </td>
+    </tr>
+</table>
+
+<h3>Statistical Calculations</h3>
+
+<table id="calculations">
+    <tr>
+        <td><button onclick="showMean()">Mean</button></td>
+        <td><button onclick="showMedian()">Median</button></td>
+    </tr>
+
+    <tr>
+        <td><button onclick="showMode()">Mode</button></td>
+        <td><button onclick="showMax()">Max</button></td>
+    </tr>
+
+    <tr>
+        <td colspan="2"><button onclick="showMin()">Min</button></td>
+    </tr>
+</table>
+
+<p id="Output"></p>
+
+<script src="js/readTextArea.js"></script>
+<script src="js/stats.js"></script>
+
+<script>
+function loadFile() {
+    const path = document.getElementById("filePath").value.trim();
+    const msg = document.getElementById("Message");
+    
+    if (path === "") {
+        msg.innerHTML = "Please enter a file path.";
+        return;
+    }
+
+    fetch(path)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Could not load file.");
+            }
+            return response.text();
+        })
+        .then(data => {
+            document.getElementById("fileInput").value = data;
+            msg.innerHTML = "Loaded file successfully.";
+        })
+        .catch(err => {
+            msg.innerHTML = "Error: " + err.message;
+        });
+}
+</script>
+
+</body>
+</html>
