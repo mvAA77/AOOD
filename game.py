@@ -9,10 +9,9 @@ from pygame.locals import (
 
 # ---------- Setup ----------
 pygame.init()
-
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+screen = pygame.display.set_mode((800, 600))
 pygame.display.set_caption("Dodge the Obstacles")
 
 clock = pygame.time.Clock()
@@ -113,7 +112,7 @@ while running:
         screen.blit(entity.surf, entity.rect)
 
     pygame.display.flip()
-    clock.tick(60)  # 60 FPS
+    clock.tick(60)
 
 pygame.quit()
 print("Goodbye")
